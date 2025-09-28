@@ -49,11 +49,9 @@ def iter_tree_implementation_three(tree: TreeNode):
 
 def iter_tree_implementation_four(node: TreeNode):
     stack = []
-    result = []
     while (not (node is None)) or stack:
         while not (node is None):
             print(node.data)
-            result.append(node)
             stack.append(node)
             node = node.left
         # 先把所有左边的处理到底，并且所有出现过的节点都被存储

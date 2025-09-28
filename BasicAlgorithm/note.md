@@ -777,3 +777,27 @@ def iter_tree_implementation_four(node: TreeNode):
 构建二叉堆，也就是把一个无序的完全二叉树调整为二叉堆，本质上是让所有非叶子结点下沉到合适的位置。从最后一个非叶子节点开始（也就是倒数第二级节点）依次向上比较即可。
 
 考虑到二叉堆是完全二叉树，所以其实已经排列很满了。加上读取次数通常大、写时往往不会大量移动，所以惯例上仍然采用数组进行存储。
+
+在这里我们引入一个新的模块，叫binarytree。
+
+```python
+from binarytree import Node
+
+def create_tree_from_list(input_list: list):
+    if (not input_list) or (input_list is None):
+        return None
+    data = input_list.pop(0)
+    if data is None:
+        return None
+    node = Node(data)
+    node.left = create_tree_from_list(input_list=input_list)
+    node.right = create_tree_from_list(input_list=input_list)
+    return node
+
+tree = create_tree_from_list([1, 2, 3, None, None, 4, None, None, 5, 6, None, None, 7, None , None])
+print(tree)
+```
+
+可以看到，为啥用这玩意儿呢？因为输出结果可视化以后很方便看（）。
+
+接下来想想怎么排序？
