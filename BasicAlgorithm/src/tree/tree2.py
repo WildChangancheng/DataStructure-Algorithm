@@ -39,35 +39,39 @@ def num_of_layer(tree: Node):
     return num
 
 
-def calculate_indice(indice:int, type):
-    if type == 'left':
-        return 2 * indice + 1
-    if type == 'right':
-        return 2 * indice + 2
-    
+def adjust_tree(tree: Node):
+    # 把树转成数组存储（假设下标从0开始）
+    lst_tree = [i.val for i in storage_binary_in_list(tree)]
+    n = len(lst_tree)
 
-def exchange_elements(lst: list, indice1: int, indice2: int):
-    return
+    def heapify(arr, n, i):
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
 
+        if left < n and arr[left] > arr[largest]:
+            largest = left
+        if right < n and arr[right] > arr[largest]:
+            largest = right
 
-def self_adjust(tree: Node):
-    lst_tree = storage_binary_in_list([i.val for i in tree])
-    layer = num_of_layer(tree)
+        if largest != i:
+            arr[i], arr[largest] = arr[largest], arr[i]
+            heapify(arr, n, largest)
 
-    for i in range(1, layer)[::-1]:
-        # 从倒数第二行开始，所以不用管最后一层
-        for j in range(2 ** (i-1), 2 ** i, 1):
-            # 2^i即第i+1行的第一个元素的序号，作为index记得-1
-            ele = lst_tree[j-1]
-            ele_left = lst_tree[calculate_indice(j, 'left')]
-            ele_right = lst_tree[calculate_indice(j, 'right')]
-            if (ele > ele_left) and (ele > ele_right):
-                continue
-            
+    def heap_to_tree(heap, i=0):
 
+        if i >= len(heap):
+            return None
+        
+        root = Node(heap[i])
+        root.left = heap_to_tree(heap, 2 * i + 1)
+        root.right = heap_to_tree(heap, 2 * i + 2)
+        return root
 
-    return 
-
+    # 从最后一个非叶子结点开始往上堆化
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(lst_tree, n, i)
+    return heap_to_tree(lst_tree)
 
 if __name__ == "__main__":
     tree = create_tree_from_list([1, 2, 3, None, None, 4, None, None, 5, 6, None, None, 7, None , None])
@@ -76,4 +80,5 @@ if __name__ == "__main__":
     print(num_of_layer(tree=tree))
 
     print(lst_tree)
+    print(adjust_tree(tree))
 
