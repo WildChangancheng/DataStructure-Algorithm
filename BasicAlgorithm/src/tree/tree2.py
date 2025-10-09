@@ -59,7 +59,6 @@ def adjust_tree(tree: Node):
             heapify(arr, n, largest)
 
     def heap_to_tree(heap, i=0):
-
         if i >= len(heap):
             return None
         

@@ -231,7 +231,7 @@ $$
 - $\Theta$
   - 同阶函数集合
   - $\Theta(𝒈(𝒏))=\{𝒇(𝒏)∣\exist𝒄_𝟏,𝒄_𝟐>𝟎和𝒏_𝟎,对于∀𝒏\geq𝒏_𝟎, 𝒄_𝟏 𝒈(𝒏)\leq𝒇(𝒏)\leq𝒄_𝟐 𝒈(𝒏)\}$
-  - 习题：证明$f(x) = \Theta{(g(x))}$，相当于解$ 𝒄_𝟏 𝒈(𝒏)\leq𝒇(𝒏)\leq𝒄_𝟐 𝒈(𝒏)$中的$c_1$和$c_2$。对于多项式函数来说，直接约分是来的最快的。
+  - 习题：证明 $f(x) = \Theta{(g(x))}$，相当于解$𝒄_𝟏 𝒈(𝒏)\leq𝒇(𝒏)\leq𝒄_𝟐 𝒈(𝒏)$中的$c_1$和$c_2$。对于多项式函数来说，直接约分是来的最快的。
 - $O$
   - 低阶函数集合
   - $O (𝒈(𝒏))=\{𝒇(𝒏)|\exist𝒄>𝟎和n_𝟎,对于∀𝒏≥𝒏_𝟎,𝟎\leq𝒇(𝒏)\leq𝒄𝒈(𝒏)\}，$
@@ -268,7 +268,7 @@ $$
 线性性质：
 
 - $∑_{(𝑘=1)}^𝑛(𝑐𝑎_𝑘+𝑏_𝑘 ) =𝑐∑_{(𝑘=1)}^𝑛𝑎_𝑘 +∑_{(𝑘=1)}^𝑛𝑏_𝑘$
-- ∑_{(𝑘=1)}^𝑛Θ(𝑓(𝑘)) =Θ(∑_{(𝑘=1)}^𝑛𝑓(𝑘)):也就是低阶函数加起来仍然是低阶
+- $∑_{(𝑘=1)}^𝑛Θ(𝑓(𝑘)) =Θ(∑_{(𝑘=1)}^𝑛𝑓(𝑘))$
 
 ### 0.4 一点实例练习
 
@@ -422,7 +422,7 @@ Application = Interface X Implementation
 
 线性表的顺序存储结构（对应数组）
 
-线性表的顺序存储，指的是用一段地址连续的存储单元依次存储线性表的数据元素。（上面的vector）优点在于无需为表示表中元素的逻辑关系而增加额外的存储空间，可以快速存取表中任意位置的元素；缺点在于插入和删除操作需要移动大量元素（例如，删除一个元素就需要把后面的元素大量往前调整）、当线性表长度变化较大时，难以确定存储空间的容量、也会造成存储空间的碎片。
+线性表的顺序存储，指的是用一段地址连续的存储单元依次存储线性表的数据元素。（就像上面的vector）优点在于无需为表示表中元素的逻辑关系而增加额外的存储空间，可以快速存取表中任意位置的元素；缺点在于插入和删除操作需要移动大量元素（例如，删除一个元素就需要把后面的元素大量往前调整）、当线性表长度变化较大时，难以确定存储空间的容量、也会造成存储空间的碎片。
 
 线性表还有一种链式存储结构（对应链表）
 
@@ -499,11 +499,19 @@ ADT是抽象数据类型abstract data type。所以为什么ADT中关心的是�
 
 #### 数组的存储结构与操作特点
 
-数组内存结构与操作特点：顺序数组在内存中采用​​连续存储​​。所有元素会一个接一个地放在内存里，每个元素的位置可以通过基地址和偏移量直接算出，这让按索引访问元素（随机存取）非常快，时间复杂度是 O(1)。​​插入操作​​：要在顺序数组中插入一个新元素，如果目标位置不在数组末尾，就需要​​将插入点之后的所有元素都向后移动一位​​，以便腾出空间。这个移动过程的时间复杂度在平均和最坏情况下是 O(n)​​删除操作​​：与插入类似，删除数组中某个位置的元素后，需要​​将删除点之后的所有元素都向前移动一位​​，以填补空缺，避免出现“空洞”。这个移动过程的时间复杂度在平均和最坏情况下也是 O(n)顺序数组（顺序表）并非没有插入和删除操作，只是这些操作在除尾部以外的位置进行时，​​需要移动大量元素，效率较低​​（时间复杂度 O(n)）。这是由其​​连续内存存储​​的特性决定的。选择数据结构时，务必结合你的核心操作需求。
+数组内存结构与操作特点：顺序数组在内存中采用​​连续存储​​。所有元素会一个接一个地放在内存里，每个元素的位置可以通过基地址和偏移量直接算出，这让按索引访问元素（随机存取）非常快，时间复杂度是 O(1)。
+
+在之前说到的线性顺序存储结构中，​​插入操作​​：要在顺序数组中插入一个新元素，如果目标位置不在数组末尾，就需要​​将插入点之后的所有元素都向后移动一位​​，以便腾出空间。这个移动过程的时间复杂度在平均和最坏情况下是 O(n)​​删除操作​​：与插入类似，删除数组中某个位置的元素后，需要​​将删除点之后的所有元素都向前移动一位​​，以填补空缺，避免出现“空洞”。这个移动过程的时间复杂度在平均和最坏情况下也是 O(n)顺序数组（顺序表）并非没有插入和删除操作，只是这些操作在除尾部以外的位置进行时，​​需要移动大量元素，效率较低​​（时间复杂度 O(n)）。这是由其​​连续内存存储​​的特性决定的。选择数据结构时，务必结合你的核心操作需求。
+
+而这里说的数组，是长度明确且不会更改（比如mxn的二维数组）的，所以不涉及插入与删除操作。这里需要辨析。因此，数组我们都采用顺序存储方案。
 
 数组有行优先存储和列优先存储两种方案。列优先存储也就是按列存储，比如fortran、matlab、r、julia之类的语言，比较契合数学上的列向量，所以也就比较适合科学计算、数值分析、线性代数运算、统计计算之类的领域；行优先策略比较符合人的基本认知，诸如C、CPP、Pascal、Python（其中的Numpy）之类的语言都属于这一派系。软件开发、图像处理、系统编程中用的比较多。
 
 如果想要实现一个数组，就可以用struct定义一个类型Array，包括数组元素基址、数组维数、数组维界基址、数组映像函数常量基址。
+
+接下来我们试试实现一个数组类型。之前已经学习过，C语言中可以用结构体实现新的数据类型。
+
+
 
 ### 3.2 特殊矩阵与稀疏矩阵
 
@@ -521,4 +529,138 @@ ADT是抽象数据类型abstract data type。所以为什么ADT中关心的是�
 计算$\delta=\frac{t}{m\times n}$，其中t是非特殊值的元素个数。如果$\delta \leq 0.05$就可以称为稀疏矩阵。
 
 可以用三元组表示稀疏矩阵，用`(row, column, value)`的形式即可。
+
+##### 稀疏矩阵的转置
+
+这里我们试试实现稀疏矩阵的转置。比较容易想到的算法就是直接遍历所有的三元组，修改行序和列序。试试实现。
+
+```c
+status transpose_matrix_implementation1(sparse_matrix original_matrix, sparse_matrix* transposed_matrix)
+{
+    // 需要修改的传指针
+    // 只需要读取的传值
+    transposed_matrix -> column = original_matrix.row;
+    transposed_matrix -> row = original_matrix.column;
+    transposed_matrix -> length = original_matrix.length;
+    
+    for (int i = 0; i < original_matrix.length; i++) {
+        transposed_matrix -> data[i].row    = original_matrix.data[i].column;
+        transposed_matrix -> data[i].column = original_matrix.data[i].row;
+        transposed_matrix -> data[i].value  = original_matrix.data[i].value;
+    }
+    return true;
+}
+```
+
+如果可以用这个方法就太好啦。但我们从结果也能很明显观察到，这段代码没有保持行主序，转之后的结果变成乱序了。也许第一个triple是第3行的，第二个triple又在第2行。这样很不利于后面的维护和使用。如果在这之后再使用排序算法，时间效率来看并不乐观。
+
+因此，我们想要转置后仍然保持行主序。
+
+于是我们想到多扫描几次，扫triple的列（因为列转置后变成行）。
+
+```c
+tatus transpose_matrix_implementation2(sparse_matrix original_matrix, sparse_matrix* transposed_matrix) { 
+    transposed_matrix->column = original_matrix.row;
+    transposed_matrix->row = original_matrix.column;
+    transposed_matrix->length = original_matrix.length;
+
+    int ele_num = 0;
+    
+    // 按列扫描（1-based 索引）
+    for (int i = 1; i <= original_matrix.column; i++) {
+        for (int j = 0; j < original_matrix.length; j++) {
+            if (original_matrix.data[j].column == i) {
+                transposed_matrix->data[ele_num].row    = i;  // 原来的 column 变成新的 row
+                transposed_matrix->data[ele_num].column = original_matrix.data[j].row; // 原来的 row 变成新的 column
+                transposed_matrix->data[ele_num].value  = original_matrix.data[j].value;
+                ele_num++;
+            }
+        }
+    }
+    return true;
+}
+```
+
+这个实现就维持了行主序。缺点在于，这个方法时间复杂度是$O(列数 * 三元组个数)$。其实也能接受，只是乘法总归是不那么完美。
+
+在此，我们引入快速转置算法。干脆直接从头数一遍，记录下来每一列有多少个元素。这样一来，就可以知道转置后某一行有多少个元素。这意味着什么呢？我们可以提前知道第n行的元素应该从哪里开始：因为可以算出前n-1行的元素总数s，之后的元素直接从s+1到s+n排就可以了，压根就不用管其他的。
+
+这时可能产生一个疑问：这样能保证行主序。但是没法保证列主序吧？我是见到谁就往对应行所在的位置直接插的啊、其实也不用担心，因为原本的数组本来就是行优先排序的，所以在前面的肯定行序很靠前，也就是转置后的列序自动保证靠前了。
+
+这样我们只用最开始扫描一次稀疏矩阵，记录下来，也就是O(三元组个数)；再遍历一遍所有列，时间复杂度O(列数)，于是时间复杂度就是$O(列数 + 三元组个数)$。变成加法以后一下子就简单多了。
+
+```c
+
+status transpose_matrix_implementation3(sparse_matrix original_matrix, sparse_matrix* transposed_matrix) { 
+    transposed_matrix->column = original_matrix.row;
+    transposed_matrix->row = original_matrix.column;
+    transposed_matrix->length = original_matrix.length;
+
+    if (original_matrix.length == 0) return true;
+
+    int tmp[original_matrix.column + 1];
+    
+    for (int i = 1; i <= original_matrix.column; i++) tmp[i] = 0;
+    
+    for (int i = 0; i < original_matrix.length; i++) {
+        int col = original_matrix.data[i].column;
+        tmp[col]++;
+    }
+    
+    int cpot[original_matrix.column + 1];
+    cpot[1] = 0;  // 第1列从位置0开始（C数组索引）
+    for (int col = 2; col <= original_matrix.column; col++) {
+        cpot[col] = cpot[col - 1] + tmp[col - 1];
+    }
+    
+    for (int j = 0; j < original_matrix.length; j++) {
+        int col = original_matrix.data[j].column;
+        int pos = cpot[col];  // 当前列应该放置的位置
+        
+        transposed_matrix->data[pos].row = original_matrix.data[j].column;
+        transposed_matrix->data[pos].column = original_matrix.data[j].row;
+        transposed_matrix->data[pos].value = original_matrix.data[j].value;
+        
+        cpot[col]++;
+    }
+    
+    return true;
+}
+```
+
+这就是最终的快速转置了。
+
+### 3.3 广义表基础
+
+我们已经见过了线性表，这要求数据元素的类型相同。在实际应用中，线性表的数据类型往往不同。于是就有了广义表。
+
+广义表是线性表的推广，也称列表(Lists)。它是𝒏个元素的有限序列，记作$L=(𝜶_𝟏, 𝜶_𝟐, ..., 𝜶_𝒏)$.其中𝑳是表名，𝒏是广义表的长度; 如果𝜶_𝒊是广义表，称为子表，用大写字母表示；如果𝜶_𝒊是单个元素，称为原子，用小写字母表示.(批注：也就是说，广义表不但可以是各种类型的数据元素作为原子混搭， 而且可以嵌套。)
+
+广义表是推广后的线性表，所以广义表的ADT定义中的关系仍然是$<\alpha_{i-1}, \alpha_i>$这样的线性的后继关系。
+
+我们定义：
+
+- 广义表中的数据元素有相对次序
+- 广义表的长度定义为最外层包含元素个数（也就是包含的子表视为1个元素）
+- 广义表的深度定义为所含括弧的数目
+  - 原子深度为0
+  - 空表深度为1
+- 广义表可以共享（`不必列出子表的值，而是通过子表的名称来引用`）
+- 广义表可以是一个递归的表
+  - 递归表的深度是无限值，但长度必须是有限制
+
+表示一个广义表可以用
+
+- 表头表尾分析法
+  - 表头 $Head(L) = 𝜶_𝟏$，表尾 $Tail(L) = (𝜶_𝟐, ..., 𝜶_𝒏)$
+  - 每个结点由`tag=0, data`(原子)或`tag=1, hp, tp`(表结点)的形式存储。其中hp是指向子表头的指针，tp是指向下一个结点的指针。
+  - 这种情况下，当遇到一个`tag=1`而第二位hp指向`tag=0, data`，tp向后指新的表就认为这这里填充了一个原子节点；遇到`tag=1`后第二位又是`tag=1`开头，就意味这进入了`深度+1`的深一层表
+- 子表分析法
+  - 把表视作$L = (𝜶_𝟏, 𝜶_𝟐, …, 𝜶_𝒏)$的线性链表。仍然用上述的表示方式，每个节点顺次相连。
+
+那核心区别在哪里？表头分析法认为，任何非空广义表 = 表头 + 表尾，除了第一位元素是表头，剩下的都是表尾，表尾永远是一个广义表；子表分析法更强调按层次结构存储，类似树的子女-兄弟表示法，也就是说更偏向于树。
+
+## 4 摊还分析
+
+## 5 树
 
