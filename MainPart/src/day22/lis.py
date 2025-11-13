@@ -2,21 +2,24 @@ from typing import List
 
 class Solution:
     def set_memory(self, n: int) -> None:
-        self.memory = [None for i in range(n)]
+        self.memory = [1 for _ in range(n)]
+
     def calculate(self, index: int, nums: List[int]) -> int:
-        if index == 0:
-            self.memory[0] = 1
-            return 1
+        if self.memory[index] != 1:
+            return self.memory[index]
+
         tmp = 1
-        for i in range(index + 1):
-            if (nums[index] >= nums[i]):
-                if ((new_sum := self.memory[i] + 1)> tmp):
-                    tmp = new_sum
+        for i in range(index):
+            if nums[index] > nums[i]:
+                tmp = max(tmp, self.memory[i] + 1)
         self.memory[index] = tmp
         return tmp
 
     def lengthOfLIS(self, nums: List[int]) -> int:
         length = len(nums)
+        if length == 0:
+            return 0
         self.set_memory(length)
-        self.calculate(index=length-1, nums=nums)
-        
+        for i in range(length):
+            self.calculate(i, nums)
+        return max(self.memory)
