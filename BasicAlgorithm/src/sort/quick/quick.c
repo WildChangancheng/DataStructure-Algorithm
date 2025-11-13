@@ -43,7 +43,7 @@ int main() {
 
     print_array(arr, n, "Before sorting:");
 
-    quick_sort(arr, n);
+    quick_sort(arr, n-2);
 
     print_array(arr, n, "Sorted:");
 
